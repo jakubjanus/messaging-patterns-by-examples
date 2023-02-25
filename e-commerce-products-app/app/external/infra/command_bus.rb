@@ -8,16 +8,16 @@ module Infra
       @handlers = {}
     end
 
-    def register(command_class, handler)
-      @handlers[command_class] = handler
+    def register(command_class, handler, method = :call)
+      @handlers[command_class] = [handler, method]
     end
 
     def call(command)
-      handler = @handlers[command.class]
+      handler, method = @handlers[command.class]
 
       raise NoHandlerRegistered, "No handler for #{command.class}" unless handler
 
-      handler.call(command)
+      handler.public_send(method, command)
     end
   end
 end

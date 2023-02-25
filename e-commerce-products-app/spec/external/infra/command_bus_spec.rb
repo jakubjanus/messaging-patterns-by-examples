@@ -24,4 +24,19 @@ RSpec.describe Infra::CommandBus do
       expect { command_bus.call(command_b_class.new) }.to raise_error(Infra::CommandBus::NoHandlerRegistered)
     end
   end
+
+  context 'when handler has other than call method' do
+    let(:handler_b) { Class.new { def start(_command); end }.new }
+
+    before do
+      command_bus.register(command_b_class, handler_b, :start)
+    end
+
+    it 'calls registered method on handler' do
+      command = command_b_class.new
+      expect(handler_b).to receive(:start).with(command)
+
+      command_bus.call(command)
+    end
+  end
 end
