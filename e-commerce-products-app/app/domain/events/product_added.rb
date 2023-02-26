@@ -5,8 +5,8 @@ module Events
     topic 'products'
     event_name 'product_added'
 
-    attribute :product_number, Infra::Command::Types::String
-    attribute :name, Infra::Command::Types::String
-    attribute :description, Infra::Command::Types::String.optional
+    attribute :product_number, Infra::Messaging::Types::String
+    attribute :name, Infra::Messaging::Types::String
+    attribute :description, Infra::Messaging::Types::String.optional
   end
 end
