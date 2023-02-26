@@ -17,6 +17,8 @@ module Services
       )
 
       publish_product_added(product)
+
+      product.product_number
     end
 
     private

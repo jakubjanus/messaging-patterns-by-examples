@@ -16,7 +16,7 @@ module Infra
       end
 
       def headers
-        super.merge({ event_name: event_name })
+        super.merge({ 'event_name' => event_name })
       end
     end
   end

@@ -21,6 +21,10 @@ RSpec.describe Services::Products do
       end.to change(Product, :count).by(1)
     end
 
+    it 'returns product number' do
+      expect(products_service.add_product(command)).to be_an_instance_of String
+    end
+
     it 'publishes ProductAdded event' do
       expect(events_publisher).to receive(:publish) do |message|
         expect(message).to be_an_instance_of Events::ProductAdded
