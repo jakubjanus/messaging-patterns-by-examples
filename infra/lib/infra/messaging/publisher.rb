@@ -9,7 +9,8 @@ module Infra
         messages = [messages] unless messages.is_a?(Array)
 
         messages.each do |message|
-          Karafka.producer.produce_sync(topic: message.topic, payload: message.payload.to_json, headers: message.headers)
+          Karafka.producer.produce_sync(topic: message.topic, payload: message.payload.to_json,
+                                        headers: message.headers)
         end
       end
     end

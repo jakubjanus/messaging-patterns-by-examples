@@ -4,7 +4,7 @@ RSpec.describe Infra::CommandBus do
   subject(:command_bus) { described_class.new }
   let(:command_a_class) { Class.new(Infra::Command) }
   let(:command_b_class) { Class.new(Infra::Command) }
-  let(:handler_a) { Proc.new {} }
+  let(:handler_a) { proc {} }
 
   before do
     command_bus.register(command_a_class, handler_a)
