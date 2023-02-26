@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'dry-struct', '>= 1.6.0'
   spec.add_dependency 'karafka', '>= 2.0.0'
 
+  spec.add_development_dependency 'pry-byebug', '~> 3.10.1'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '~> 1.21'
