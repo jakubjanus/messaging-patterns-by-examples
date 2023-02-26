@@ -1,3 +1,10 @@
+PATH
+  remote: ../infra
+  specs:
+    infra (0.1.0)
+      dry-struct (>= 1.6.0)
+      karafka (>= 2.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -223,6 +230,7 @@ DEPENDENCIES
   bootsnap
   debug
   dry-struct
+  infra!
   karafka (~> 2.0.0)
   pg (~> 1.1)
   pry-byebug
