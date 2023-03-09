@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'infra/messaging/testing'
 
 RSpec.describe Services::Products do
   subject(:products_service) { described_class.new(events_publisher) }
   let(:events_publisher) { Infra::Messaging::Publisher.new }
 
   before do
-    allow(events_publisher).to receive(:publish)
+    Infra::Config.publisher_strategy = :fake
+    Infra::Messaging::Testing.clear_published_messages
   end
 
   describe '#add_product' do
@@ -26,11 +28,21 @@ RSpec.describe Services::Products do
     end
 
     it 'publishes ProductAdded event' do
-      expect(events_publisher).to receive(:publish) do |message|
-        expect(message).to be_an_instance_of Events::ProductAdded
+      products_service.add_product(command)
+
+      expect(events_publisher).to have_published(Events::ProductAdded)
+    end
+
+    context 'with specified category' do
+      let(:command) do
+        Commands::AddProduct.new(name: 'Rondo jersey', description: 'Boston celtics, number 9', category: 'top wear')
       end
 
-      products_service.add_product(command)
+      it 'publishes ProductCategorised event' do
+        products_service.add_product(command)
+
+        expect(events_publisher).to have_published(Events::ProductCategorised)
+      end
     end
   end
 end

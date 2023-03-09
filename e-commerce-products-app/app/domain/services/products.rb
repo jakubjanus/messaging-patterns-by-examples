@@ -17,6 +17,7 @@ module Services
       )
 
       publish_product_added(product)
+      publish_product_categorised(product) if product.category
 
       product.product_number
     end
@@ -34,6 +35,16 @@ module Services
         product_number: product.product_number,
         name: product.name,
         description: product.description
+      )
+
+      events_publisher.publish(event)
+    end
+
+    def publish_product_categorised(product)
+      event = Events::ProductCategorised.new(
+        product_number: product.product_number,
+        category: product.category,
+        category_reference: product.category
       )
 
       events_publisher.publish(event)

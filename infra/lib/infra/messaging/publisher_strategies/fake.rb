@@ -20,6 +20,14 @@ module Infra
         def reset
           @messages = []
         end
+
+        def to_sym
+          :fake
+        end
+
+        def published_messages
+          @messages
+        end
       end
     end
   end
