@@ -33,6 +33,12 @@ RSpec.describe Services::Products do
       expect(events_publisher).to have_published(Events::ProductAdded)
     end
 
+    it 'does not publish ProductCategorised event' do
+      products_service.add_product(command)
+
+      expect(events_publisher).not_to have_published(Events::ProductCategorised)
+    end
+
     context 'with specified category' do
       let(:command) do
         Commands::AddProduct.new(name: 'Rondo jersey', description: 'Boston celtics, number 9', category: 'top wear')
