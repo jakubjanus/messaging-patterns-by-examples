@@ -7,6 +7,7 @@ services:
       - 3001:3001
     environment:
       DATABASE_HOST: postgres
+      KAFKA_HOST: kafka
     depends_on:
       - infra
   infra:

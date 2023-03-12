@@ -2,7 +2,9 @@
 
 class KarafkaApp < Karafka::App
   setup do |config|
-    config.kafka = { 'bootstrap.servers': '127.0.0.1:9092' }
+    kafka_host = ENV.fetch('KAFKA_HOST', '127.0.0.1')
+    kafka_port = ENV.fetch('KAFKA_PORT', '9092')
+    config.kafka = { 'bootstrap.servers': "#{kafka_host}:#{kafka_port}" }
     config.client_id = 'products-app'
     # Recreate consumers with each batch. This will allow Rails code reload to work in the
     # development mode. Otherwise Karafka process would not be aware of code changes
