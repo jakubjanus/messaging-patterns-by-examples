@@ -10,6 +10,10 @@ services:
       KAFKA_HOST: kafka
     depends_on:
       - infra
+      - postgres
+      - kafka
+    volumes:
+      - ./e-commerce-products-app:/app
   infra:
     container_name: messaging-infra
     build:

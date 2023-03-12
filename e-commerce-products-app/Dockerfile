@@ -20,4 +20,4 @@ COPY --chown=products-app . /app
 USER products-app
 
 EXPOSE ${PORT}
-CMD bundle exec rails s -p $PORT -b 0.0.0.0
+CMD ./scripts/start-server
