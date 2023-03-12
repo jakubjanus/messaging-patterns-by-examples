@@ -1,5 +1,18 @@
 version: "3.8"
 services:
+  products-app:
+    build:
+      context: ./e-commerce-products-app
+    ports:
+      - 3001:3001
+    environment:
+      DATABASE_HOST: postgres
+    depends_on:
+      - infra
+  infra:
+    container_name: messaging-infra
+    build:
+      context: ./infra
   postgres:
     image: postgres:15
     environment:
