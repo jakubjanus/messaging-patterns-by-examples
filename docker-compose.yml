@@ -14,6 +14,18 @@ services:
       - kafka
     volumes:
       - ./e-commerce-products-app:/app
+  pricing-consumer:
+    build:
+      context: ./e-commerce-pricing-app
+    environment:
+      DATABASE_HOST: postgres
+      KAFKA_HOST: kafka
+    depends_on:
+      - infra
+      - postgres
+      - kafka
+    volumes:
+      - ./e-commerce-pricing-app:/app
   infra:
     container_name: messaging-infra
     build:
